@@ -34,6 +34,9 @@ static const char *TAG = "main";
 #define WIFI_PASSWORD  CONFIG_WIFI_PASSWORD
 
 // Event group to signal WiFi connection status
+// Note: This event group is created once in wifi_init_sta() and intentionally
+// never deleted. It exists for the lifetime of the application since WiFi
+// events can occur at any time during normal operation.
 static EventGroupHandle_t s_wifi_event_group;
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT      BIT1
