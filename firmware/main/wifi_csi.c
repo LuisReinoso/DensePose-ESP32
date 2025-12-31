@@ -119,10 +119,14 @@ static void wifi_csi_rx_cb(void *ctx, wifi_csi_info_t *info)
     processed.timestamp = (uint32_t)(esp_timer_get_time() / 1000);  // Convert to ms
 
     // Store as latest (thread-safe)
-    if (xSemaphoreTake(s_csi_mutex, 0) == pdTRUE) {
+    // Use small timeout instead of immediate fail to reduce mutex contention issues
+    if (xSemaphoreTake(s_csi_mutex, pdMS_TO_TICKS(1)) == pdTRUE) {
         memcpy(&s_latest_csi, &processed, sizeof(csi_data_t));
         xSemaphoreGive(s_csi_mutex);
         s_packets_processed++;
+    } else {
+        // Mutex was held - skip storing this packet but still process it
+        // This prevents blocking the WiFi driver callback
     }
 
     // Call user callback if registered
