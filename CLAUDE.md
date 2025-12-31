@@ -56,8 +56,7 @@ DensePose-ESP32/
 ├── models/             # ML models
 │   ├── training/       # Python training scripts
 │   └── tflite/         # Quantized models for ESP32
-├── tools/              # Helper scripts
-└── .beads/             # Task tracking (beads)
+└── tools/              # Helper scripts
 ```
 
 ## Key Technical Concepts
@@ -124,16 +123,6 @@ idf.py build flash monitor
 - Use `ESP_LOGI()`, `ESP_LOGD()`, `ESP_LOGE()` for logging
 - Monitor output: `idf.py monitor` (Ctrl+] to exit)
 - GDB debugging available via JTAG
-
-## Task Management
-
-This project uses [Beads](https://github.com/steveyegge/beads) for task tracking:
-```bash
-bd list          # List all tasks
-bd ready         # Show unblocked tasks
-bd create "..."  # Create new task
-bd done <id>     # Mark task complete
-```
 
 ## References
 

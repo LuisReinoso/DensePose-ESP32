@@ -212,24 +212,6 @@ interpreter.Invoke();
 - **Tensor arena**: ~100-200KB (internal SRAM preferred)
 - **Quantization**: INT8 required for speed and size
 
-## Beads Task Tracking
-
-Use beads for task management:
-```bash
-# View tasks
-bd list
-bd ready
-
-# Create task
-bd create "Implement CSI callback handler"
-
-# Add dependency
-bd dep add <child-id> <parent-id>
-
-# Complete task
-bd done <id>
-```
-
 ## Testing Strategy
 
 1. **Unit tests**: ESP-IDF Unity framework
