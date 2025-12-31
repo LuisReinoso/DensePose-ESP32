@@ -18,4 +18,5 @@ idf_component_register(
         driver
     PRIV_REQUIRES
         esp_timer
+        esp_driver_rmt
 )

@@ -90,14 +90,8 @@ static esp_err_t csi_stream_handler(httpd_req_t *req)
     // Stream CSI data
     csi_http_data_t csi_data;
     char buffer[512];
-    int client_fd = httpd_req_to_sockfd(req);
 
     while (1) {
-        // Check if client is still connected
-        if (httpd_session_get_ctx(s_server, client_fd) == NULL) {
-            break;
-        }
-
         // Wait for CSI data (with timeout to check connection)
         if (xQueueReceive(s_csi_queue, &csi_data, pdMS_TO_TICKS(1000)) == pdTRUE) {
             // Format as SSE data
