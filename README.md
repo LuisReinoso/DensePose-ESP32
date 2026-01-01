@@ -1,6 +1,13 @@
 # DensePose-ESP32
 
-WiFi-based human pose estimation on ESP32-S3 hardware, inspired by "DensePose From WiFi" (arXiv:2301.00250).
+WiFi-based human pose estimation on ESP32 hardware, inspired by "DensePose From WiFi" (arXiv:2301.00250).
+
+**📚 Documentation:**
+- **New to this project?** → Start with [`QUICK-START.md`](QUICK-START.md) (5-minute setup)
+- **Setting up multiple ESP32s?** → See [`docs/ESP32-Setup-Guide.md`](docs/ESP32-Setup-Guide.md)
+- **Having issues?** → Check [`docs/Troubleshooting-Checklist.md`](docs/Troubleshooting-Checklist.md)
+
+**⚠️ Hardware Note:** This project was designed for ESP32-S3, but also works on regular ESP32 (ESP32-D0WD) with minor configuration changes. See documentation for details.
 
 ## Quick Start
 
@@ -145,19 +152,43 @@ idf.py -p /dev/ttyUSB0 flash
 
 ### Troubleshooting
 
+**⚠️ IMPORTANT: Check your hardware first!**
+
+This project is designed for ESP32-S3, but also works on regular ESP32 (ESP32-D0WD) with configuration changes.
+
+**Quick hardware check:**
+```bash
+. ~/esp/esp-idf/export.sh
+idf.py -p /dev/ttyUSB0 flash | grep "Chip is"
+```
+
+**Common Issues:**
+
+**PSRAM boot loop (constant rebooting):**
+- **Symptom:** `E (407) quad_psram: PSRAM ID read error`
+- **Cause:** Firmware configured for PSRAM but chip doesn't have it
+- **Fix:** See `docs/Troubleshooting-Checklist.md` → "PSRAM Boot Loop"
+
 **WiFi not connecting:**
 - Check SSID and password in `.env`
 - Verify your router is on 2.4GHz (ESP32 doesn't support 5GHz)
 - Check serial monitor output for error messages
+- See `docs/ESP32-Setup-Guide.md` → "Wrong WiFi Credentials"
 
-**Build fails with missing WiFi config:**
-- Ensure `.env` exists or use `idf.py menuconfig` to set credentials
-- Verify `.env` format matches `.env.example`
+**No CSI data packets:**
+- CSI requires WiFi traffic to be generated
+- Try pinging: `ping -i 0.1 192.168.1.255`
+- See `docs/ESP32-Setup-Guide.md` → "No CSI Packets Received"
 
 **USB device not found:**
 - Try `/dev/ttyACM0` instead of `/dev/ttyUSB0`
 - Check USB cable supports data (not just power)
 - Hold BOOT button while plugging in (on ESP32-S3-Zero)
+
+**📚 For detailed troubleshooting, see:**
+- `QUICK-START.md` - 5-minute setup guide
+- `docs/ESP32-Setup-Guide.md` - Complete setup documentation
+- `docs/Troubleshooting-Checklist.md` - Step-by-step diagnostics
 
 ## References
 
