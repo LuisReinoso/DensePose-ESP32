@@ -6,8 +6,16 @@ WiFi-based human pose estimation on ESP32 hardware, inspired by "DensePose From 
 - **New to this project?** → Start with [`QUICK-START.md`](QUICK-START.md) (5-minute setup)
 - **Setting up multiple ESP32s?** → See [`docs/ESP32-Setup-Guide.md`](docs/ESP32-Setup-Guide.md)
 - **Having issues?** → Check [`docs/Troubleshooting-Checklist.md`](docs/Troubleshooting-Checklist.md)
+- **Signal processing?** → See [`docs/Phase3-Signal-Processing.md`](docs/Phase3-Signal-Processing.md)
 
 **⚠️ Hardware Note:** This project was designed for ESP32-S3, but also works on regular ESP32 (ESP32-D0WD) with minor configuration changes. See documentation for details.
+
+## Project Status
+
+- ✅ **Phase 1**: Hardware Setup & ESP-IDF Integration
+- ✅ **Phase 2**: WiFi CSI Data Collection
+- ✅ **Phase 3**: Signal Processing & Feature Extraction
+- 🔄 **Phase 4**: Machine Learning (Coming Next)
 
 ## Quick Start
 
